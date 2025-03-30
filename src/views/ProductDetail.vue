@@ -385,7 +385,9 @@
   <script setup>
   import { ref, computed, onMounted } from 'vue';
   import { useRoute, useRouter } from 'vue-router';
-    
+  import img1 from "../assets/img1.png"
+import img2 from "../assets/img1.png"
+import img3 from "../assets/img1.png"
   // Подключаем роуты
   const route = useRoute();
   const router = useRouter();
@@ -424,10 +426,10 @@
       { name: 'Колеса', value: '28 дюймов' }
     ],
     images: [
-      '../src/assets/img1.png',
-       '../src/assets/img2.png',
-       '../src/assets/img3.png',
-       '../src/assets/img1.png'
+    img1,
+    img2,
+       img3,
+       img1
     ]
   });
     
@@ -436,17 +438,17 @@
       id: 2,
       name: 'E-BIKES Sport',
       price: '189 900',
-      image: '../src/assets/img1.png'    },
+      image: img1  },
     {
       id: 4,
       name: 'E-BIKES Urban Pro',
       price: '179 900',
-      image: '../src/assets/img2.png'    },
+      image: img2   },
     {
       id: 5,
       name: 'E-BIKES Sport Light',
       price: '169 900',
-      image: '../src/assets/img3.png'    }
+      image: img3   }
   ]);
     
   // Индекс текущего изображения товара

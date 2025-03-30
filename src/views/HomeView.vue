@@ -7,7 +7,7 @@
         <img src="../assets/photo.png" alt="E-BIKE" class="w-full h-full object-cover object-center" />
       </div>
       
-      <div class="container relative z-10">
+      <div class="container  relative z-10">
         <div class="max-w-2xl">
           <h1 class="text-4xl md:text-6xl font-bold mb-6">
             Будущее городской мобильности
@@ -79,16 +79,15 @@
         
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           <div v-for="product in featuredProducts" :key="product.id" class="bg-gray-900 rounded-lg overflow-hidden group">
-            <div class="relative overflow-hidden">
+            <router-link :to="`/catalog/${product.id}`" class="relative overflow-hidden btn btn-primary text-sm py-2">
               <img :src="product.image" :alt="product.name" class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-105" />
               <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
                 <div class="p-4">
-                  <router-link :to="`/catalog/${product.id}`" class="btn btn-primary text-sm py-2">
-                    Подробнее
-                  </router-link>
+                  
                 </div>
               </div>
-            </div>
+            </router-link>
+       
             <div class="p-6">
               <h3 class="text-xl font-bold mb-2">{{ product.name }}</h3>
               <div class="flex justify-between items-center">

@@ -99,7 +99,9 @@
 
 <script setup>
 import { ref, computed } from 'vue';
-
+import img1 from "../assets/img1.png"
+import img2 from "../assets/img2.png"
+import img3 from "../assets/img3.png"
 const filters = ref({
   category: '',
   color: '',
@@ -119,7 +121,7 @@ const products = ref([
     color: 'white',
     popular: 95,
     isNew: false,
-    image: '../src/assets/img1.png'
+    image: img1
   },
   {
     id: 2,
@@ -131,7 +133,7 @@ const products = ref([
     color: 'black',
     popular: 87,
     isNew: true,
-    image: '../src/assets/img2.png'  },
+    image: img2  },
   {
     id: 3,
     name: 'E-BIKES Cargo',
@@ -142,7 +144,7 @@ const products = ref([
     color: 'green',
     popular: 78,
     isNew: false,
-    image: '../src/assets/img3.png'  },
+    image: img3  },
   {
     id: 4,
     name: 'E-BIKES Urban Pro',
@@ -153,7 +155,7 @@ const products = ref([
     color: 'black',
     popular: 92,
     isNew: true,
-    image: '../src/assets/img1.png'  },
+    image: img1  },
   {
     id: 5,
     name: 'E-BIKES Sport Light',
@@ -164,7 +166,7 @@ const products = ref([
     color: 'white',
     popular: 85,
     isNew: false,
-    image: '../src/assets/img2.png'  },
+    image: img2  },
   {
     id: 6,
     name: 'E-BIKES Cargo Max',
@@ -175,7 +177,7 @@ const products = ref([
     color: 'green',
     popular: 75,
     isNew: true,
-    image: '../src/assets/img3.png'  }
+    image: img3  }
 ]);
 
 const filteredProducts = computed(() => {

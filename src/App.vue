@@ -55,7 +55,7 @@
     </header>
 
     <!-- Main Content -->
-    <main class="pt-20 pl-[20px] pr-[20px]">
+    <main class="pt-20">
       <router-view v-slot="{ Component }">
         <transition name="fade" mode="out-in">
           <component :is="Component" />
