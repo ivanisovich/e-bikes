@@ -160,26 +160,28 @@
 
 <script setup>
 import { ref } from 'vue';
-
+import img1 from "../assets/img1.png"
+import img2 from "../assets/img1.png"
+import img3 from "../assets/img1.png"
 const featuredProducts = ref([
   {
     id: 1,
     name: 'E-BIKES Urban',
     price: '149 900',
     rating: 4.8,
-    image: '../src/assets/img1.png'  },
+    image: img1  },
   {
     id: 2,
     name: 'E-BIKES Sport',
     price: '189 900',
     rating: 4.9,
-    image: '../src/assets/img2.png'  },
+    image: img2  },
   {
     id: 3,
     name: 'E-BIKES Cargo',
     price: '219 900',
     rating: 4.7,
-    image: '../src/assets/img3.png'  }
+    image: img3  }
 ]);
 
 const testimonials = ref([
