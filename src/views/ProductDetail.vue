@@ -714,12 +714,7 @@ function addToCart() {
   alert(`Товар "${product.value.name}" добавлен в корзину`);
 }
   
-onMounted(() => {
-  const productId = parseInt(route.params.id);
-  if (productId !== 1) {
-    router.push('/catalog');
-  }
-});
+
 </script>
   
 <style scoped>
