@@ -20,8 +20,8 @@
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-12">
         <!-- Фотографии товара -->
         <div>
-          <div class="bg-gray-900 rounded-lg overflow-hidden mb-4">
-            <img :src="activeImage" :alt="product.name" class="w-full h-auto object-cover" />
+          <div class="bg-gray-900 md:h-[500px] rounded-lg overflow-hidden mb-4">
+            <img style="object-position: center;" :src="activeImage" :alt="product.name" class="w-full h-full object-cover" />
           </div>
           <div class="grid grid-cols-4 gap-2 md:gap-4">
             <div v-for="(image, index) in product.images" :key="index"
