@@ -424,10 +424,10 @@
       { name: 'Колеса', value: '28 дюймов' }
     ],
     images: [
-      '/src/assets/img1.png',
-       '/src/assets/img2.png',
-       '/src/assets/img3.png',
-       '/src/assets/img1.png'
+      '../src/assets/img1.png',
+       '../src/assets/img2.png',
+       '../src/assets/img3.png',
+       '../src/assets/img1.png'
     ]
   });
     
@@ -436,17 +436,17 @@
       id: 2,
       name: 'E-BIKES Sport',
       price: '189 900',
-      image: '/src/assets/img1.png'    },
+      image: '../src/assets/img1.png'    },
     {
       id: 4,
       name: 'E-BIKES Urban Pro',
       price: '179 900',
-      image: '/src/assets/img2.png'    },
+      image: '../src/assets/img2.png'    },
     {
       id: 5,
       name: 'E-BIKES Sport Light',
       price: '169 900',
-      image: '/src/assets/img3.png'    }
+      image: '../src/assets/img3.png'    }
   ]);
     
   // Индекс текущего изображения товара

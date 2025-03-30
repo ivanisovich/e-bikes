@@ -167,19 +167,19 @@ const featuredProducts = ref([
     name: 'E-BIKES Urban',
     price: '149 900',
     rating: 4.8,
-    image: '/src/assets/img1.png'  },
+    image: '../src/assets/img1.png'  },
   {
     id: 2,
     name: 'E-BIKES Sport',
     price: '189 900',
     rating: 4.9,
-    image: '/src/assets/img2.png'  },
+    image: '../src/assets/img2.png'  },
   {
     id: 3,
     name: 'E-BIKES Cargo',
     price: '219 900',
     rating: 4.7,
-    image: '/src/assets/img3.png'  }
+    image: '../src/assets/img3.png'  }
 ]);
 
 const testimonials = ref([

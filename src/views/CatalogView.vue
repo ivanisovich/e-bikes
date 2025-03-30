@@ -119,7 +119,7 @@ const products = ref([
     color: 'white',
     popular: 95,
     isNew: false,
-    image: '/src/assets/img1.png'
+    image: '../src/assets/img1.png'
   },
   {
     id: 2,
@@ -131,7 +131,7 @@ const products = ref([
     color: 'black',
     popular: 87,
     isNew: true,
-    image: '/src/assets/img2.png'  },
+    image: '../src/assets/img2.png'  },
   {
     id: 3,
     name: 'E-BIKES Cargo',
@@ -142,7 +142,7 @@ const products = ref([
     color: 'green',
     popular: 78,
     isNew: false,
-    image: '/src/assets/img3.png'  },
+    image: '../src/assets/img3.png'  },
   {
     id: 4,
     name: 'E-BIKES Urban Pro',
@@ -153,7 +153,7 @@ const products = ref([
     color: 'black',
     popular: 92,
     isNew: true,
-    image: '/src/assets/img1.png'  },
+    image: '../src/assets/img1.png'  },
   {
     id: 5,
     name: 'E-BIKES Sport Light',
@@ -164,7 +164,7 @@ const products = ref([
     color: 'white',
     popular: 85,
     isNew: false,
-    image: '/src/assets/img2.png'  },
+    image: '../src/assets/img2.png'  },
   {
     id: 6,
     name: 'E-BIKES Cargo Max',
@@ -175,7 +175,7 @@ const products = ref([
     color: 'green',
     popular: 75,
     isNew: true,
-    image: '/src/assets/img3.png'  }
+    image: '../src/assets/img3.png'  }
 ]);
 
 const filteredProducts = computed(() => {
