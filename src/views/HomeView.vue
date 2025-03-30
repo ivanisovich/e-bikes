@@ -4,7 +4,7 @@
     <section class="relative h-screen flex items-center">
       <div class="absolute inset-0 z-0">
         <div class="absolute inset-0 bg-gradient-to-r from-black to-black/20"></div>
-        <img src="/public/photo.png" alt="E-BIKE" class="w-full h-full object-cover object-center" />
+        <img src="/photo.png" alt="E-BIKE" class="w-full h-full object-cover object-center" />
       </div>
       
       <div class="container relative z-10">

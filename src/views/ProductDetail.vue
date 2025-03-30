@@ -423,10 +423,10 @@
       { name: 'Колеса', value: '28 дюймов' }
     ],
     images: [
-      '/public/img1.png',
-       '/public/img2.png',
-       '/public/img3.png',
-       '/public/img1.png'
+      '/img1.png',
+       '/img2.png',
+       '/img3.png',
+       '/img1.png'
     ]
   });
     
@@ -435,17 +435,17 @@
       id: 2,
       name: 'E-BIKES Sport',
       price: '189 900',
-      image: '/public/img1.png'    },
+      image: '/img1.png'    },
     {
       id: 4,
       name: 'E-BIKES Urban Pro',
       price: '179 900',
-      image: '/public/img2.png'    },
+      image: '/img2.png'    },
     {
       id: 5,
       name: 'E-BIKES Sport Light',
       price: '169 900',
-      image: '/public/img3.png'    }
+      image: '/img3.png'    }
   ]);
     
   // Индекс текущего изображения товара
@@ -489,13 +489,13 @@
           name: 'Материал рамы',
           description: 'Выберите материал для рамы велосипеда',
           values: [
-            { id: 'standard', name: 'Алюминий', price: 0, img: '/public/ram.png' },
-            { id: 'premium', name: 'Карбон', price: 30000, img: '/public/ram.png' },
-            { id: 'titanium', name: 'Титан', price: 50000, img: '/public/ram.png' }
+            { id: 'standard', name: 'Алюминий', price: 0, img: '/ram.png' },
+            { id: 'premium', name: 'Карбон', price: 30000, img: '/ram.png' },
+            { id: 'titanium', name: 'Титан', price: 50000, img: '/ram.png' }
           ]
         }
       ],
-      img: '/public/ram.png'
+      img: '/ram.png'
     },
     {
       name: 'Двигатель',
@@ -505,13 +505,13 @@
           name: 'Тип двигателя',
           description: 'Выберите тип и мощность двигателя',
           values: [
-            { id: 'standard', name: '250W Стандарт', price: 0, img: '/public/motor.png' },
-            { id: 'performance', name: '350W Performance', price: 15000, img: '/public/motor.png' },
-            { id: 'pro', name: '500W Pro', price: 25000, img: '/public/motor.png' }
+            { id: 'standard', name: '250W Стандарт', price: 0, img: '/motor.png' },
+            { id: 'performance', name: '350W Performance', price: 15000, img: '/motor.png' },
+            { id: 'pro', name: '500W Pro', price: 25000, img: '/motor.png' }
           ]
         }
       ],
-      img: '/public/motor.png'
+      img: '/motor.png'
     },
     {
       name: 'Аккумулятор',
@@ -521,13 +521,13 @@
           name: 'Емкость аккумулятора',
           description: 'Выберите емкость аккумулятора',
           values: [
-            { id: 'standard', name: '360Wh Стандарт', price: 0, img: '/public/acc.png' },
-            { id: 'extended', name: '500Wh Расширенный', price: 20000, img: '/public/acc.png' },
-            { id: 'max', name: '750Wh Максимальный', price: 35000, img: '/public/acc.png' }
+            { id: 'standard', name: '360Wh Стандарт', price: 0, img: '/acc.png' },
+            { id: 'extended', name: '500Wh Расширенный', price: 20000, img: '/acc.png' },
+            { id: 'max', name: '750Wh Максимальный', price: 35000, img: '/acc.png' }
           ]
         }
       ],
-      img: '/public/acc.png'
+      img: '/acc.png'
     },
     {
       name: 'Колеса',
@@ -537,9 +537,9 @@
           name: 'Тип колес',
           description: 'Выберите тип колес',
           values: [
-            { id: 'standard', name: 'Стандартные', price: 0,img: '/public/wheel.png'  },
-            { id: 'lightweight', name: 'Облегченные', price: 12000,img: '/public/wheel.png'  },
-            { id: 'offroad', name: 'Внедорожные', price: 15000,img: '/public/wheel.png'  }
+            { id: 'standard', name: 'Стандартные', price: 0,img: '/wheel.png'  },
+            { id: 'lightweight', name: 'Облегченные', price: 12000,img: '/wheel.png'  },
+            { id: 'offroad', name: 'Внедорожные', price: 15000,img: '/wheel.png'  }
           ]
         }
       ]
@@ -552,10 +552,10 @@
           name: 'Тип подвески',
           description: 'Выберите тип подвески',
           values: [
-            { id: 'standard', name: 'Жесткая вилка', price: 0,img: '/public/pod.png' },
-            { id: 'front', name: 'Передняя амортизация', price: 18000,img: '/public/pod.png' },
-            { id: 'full', name: 'Полная амортизация', price: 35000,img: '/public/pod.png'  },
-            { id: 'full', name: 'Полная амортизация', price: 35000,img: '/public/pod.png' }
+            { id: 'standard', name: 'Жесткая вилка', price: 0,img: '/pod.png' },
+            { id: 'front', name: 'Передняя амортизация', price: 18000,img: '/pod.png' },
+            { id: 'full', name: 'Полная амортизация', price: 35000,img: '/pod.png'  },
+            { id: 'full', name: 'Полная амортизация', price: 35000,img: '/pod.png' }
           ]
         }
       ]
@@ -568,8 +568,8 @@
           name: 'Тип тормозов',
           description: 'Выберите тип тормозной системы',
           values: [
-            { id: 'standard', name: 'Гидравлические', price: 0,img: '/public/brakes.png' },
-            { id: 'premium', name: 'Премиум гидравлические', price: 10000,img: '/public/brakes.png' }
+            { id: 'standard', name: 'Гидравлические', price: 0,img: '/brakes.png' },
+            { id: 'premium', name: 'Премиум гидравлические', price: 10000,img: '/brakes.png' }
           ]
         }
       ]
