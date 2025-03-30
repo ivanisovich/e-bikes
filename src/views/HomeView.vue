@@ -165,7 +165,7 @@ const featuredProducts = ref([
     name: 'E-BIKES Urban',
     price: '149 900',
     rating: 4.8,
-    image: '/public/img1.png'  },
+    image: '../public/img1.png'  },
   {
     id: 2,
     name: 'E-BIKES Sport',
