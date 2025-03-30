@@ -7,7 +7,7 @@
         <div class="relative rounded-lg overflow-hidden mb-16">
           <div class="absolute inset-0 z-0">
             <div class="absolute inset-0 bg-gradient-to-r from-black to-black/70"></div>
-            <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/ebikesguide-5-2gJhPktlkNfVuDd4YYfJpP0ktNtN1X.webp" alt="Техническое обслуживание" class="w-full h-full object-cover object-center" />
+            <img src="/img3.png" alt="Техническое обслуживание" class="w-full h-full object-cover object-center" />
           </div>
           
           <div class="relative z-10 p-8 md:p-12 lg:p-16">
