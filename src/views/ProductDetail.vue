@@ -185,209 +185,206 @@
         </div>
       </div>
     
-      <!-- Модальное окно кастомизации: улучшенный интерфейс -->
       <Transition name="modal">
-        <div 
-          v-if="isCustomizing"
-          class="fixed inset-0 z-50 flex items-center justify-center"
-        >
-          <!-- Затемнённая подложка -->
-          <div
-            class="absolute inset-0 bg-black bg-opacity-90"
-            @click="isCustomizing = false"
-          ></div>
-    
-          <!-- Основной блок модалки -->
-          <div
-            class="relative w-full max-w-6xl h-[90vh] bg-gray-900 rounded-lg overflow-hidden flex flex-col 
-                 border border-gray-700 shadow-2xl"
-            style="background: radial-gradient(circle at center, #212121 30%, #111 90%)"
+    <div 
+      v-if="isCustomizing"
+      class="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4"
+    >
+      <!-- Затемнённая подложка -->
+      <div
+        class="absolute inset-0 bg-black bg-opacity-90"
+        @click="closeModal"
+      ></div>
+  
+      <!-- Основной блок модалки -->
+      <div
+        class="relative w-full max-w-6xl h-[90vh] bg-gray-900 rounded-lg overflow-hidden flex flex-col 
+             border border-gray-700 shadow-2xl"
+        style="background: radial-gradient(circle at center, #212121 30%, #111 90%)"
+      >
+        <!-- Шапка -->
+        <div class="bg-black p-3 sm:p-4 flex items-center justify-between border-b border-gray-700">
+          <h2 class="text-lg sm:text-xl font-bold text-green-400 tracking-wider uppercase truncate">
+            Тюнинг {{ product.name }}
+          </h2>
+          <button
+            @click="closeModal"
+            class="text-gray-400 hover:text-white transition-transform hover:scale-110 p-1"
+            aria-label="Закрыть"
           >
-            <!-- Шапка -->
-            <div class="bg-black p-4 flex items-center justify-between border-b border-gray-700">
-              <h2 class="text-xl font-bold text-green-400 tracking-wider uppercase">
-                Тюнинг {{ product.name }}
-              </h2>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-5 w-5 sm:h-6 sm:w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path 
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </button>
+        </div>
+  
+        <!-- Основной контент кастомизации: адаптивный макет -->
+        <div class="flex flex-1 overflow-hidden flex-col">
+          <!-- Навигация по категориям (горизонтальная на мобильных) -->
+          <div class="bg-gray-800 border-b border-gray-700 overflow-x-auto">
+            <div class="p-2 flex md:flex-col">
               <button
-                @click="isCustomizing = false"
-                class="text-gray-400 hover:text-white transition-transform hover:scale-110"
+                v-for="(category, index) in customizationCategories"
+                :key="index"
+                @click="activeCustomizationCategory = index"
+                class="cursor-pointer px-3 py-2 sm:px-4 sm:py-3 rounded-md text-sm font-medium transition-all duration-300
+                      flex items-center justify-between whitespace-nowrap mr-2 md:mr-0 md:mb-1 min-w-[100px] md:w-full"
+                :class="
+                  activeCustomizationCategory === index
+                    ? 'bg-green-500 text-white shadow-green-500/50 shadow'
+                    : 'bg-gray-700 text-gray-300'
+                "
               >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
+                <span class="cursor-pointer">{{ category.name }}</span>
+                <svg 
+                  v-if="activeCustomizationCategory === index"
+                  xmlns="http://www.w3.org/2000/svg" 
+                  class="h-4 w-4 ml-2" 
+                  viewBox="0 0 20 20" 
+                  fill="currentColor"
                 >
-                  <path 
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M6 18L18 6M6 6l12 12"
-                  />
+                  <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
                 </svg>
               </button>
             </div>
-    
-            <!-- Основной контент кастомизации: адаптивный макет -->
-            <div class="flex flex-1 overflow-hidden flex-col md:flex-row">
-              <!-- Навигация по категориям (верхняя на мобильных, левая на десктопах) -->
-              <div class="md:w-1/5 bg-gray-800 border-r border-gray-700 overflow-y-auto">
-                <div class="p-2">
-                  <div class="space-y-1">
-                    <button
-                      v-for="(category, index) in customizationCategories"
-                      :key="index"
-                      @click="activeCustomizationCategory = index"
-                      class="w-full cursor-pointer px-4 py-3 rounded-md text-sm font-medium transition-all duration-300
-                            flex items-center justify-between
-                           focus:outline-none"
-                      :class="
-                        activeCustomizationCategory === index
-                          ? 'bg-green-500 text-white shadow-green-500/50 shadow'
-                          : 'bg-gray-700 text-gray-300'
-                      "
-                    >
-                      <span class="cursor-pointer ">{{ category.name }}</span>
-                      <svg 
-                        v-if="activeCustomizationCategory === index"
-                        xmlns="http://www.w3.org/2000/svg" 
-                        class="h-5 w-5" 
-                        viewBox="0 0 20 20" 
-                        fill="currentColor"
-                      >
-                        <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
-                      </svg>
-                    </button>
-                  </div>
-                </div>
-              </div>
-    
-              <!-- Центральная часть: предпросмотр и опции -->
-              <div class="flex-1 flex flex-col md:flex-row overflow-hidden">
-                <!-- Предпросмотр (верхняя часть на мобильных, левая на десктопах) -->
-                <div
-                  class="md:w-1/2 h-64 md:h-auto bg-black p-4 flex items-center justify-center
-                       relative overflow-hidden"
-                  style="background: linear-gradient(135deg, #111 20%, #222 80%)"
-                >
-                  <!-- Изображение с учетом выбранных опций -->
-                  <Transition name="fade" mode="out-in">
-                    <img
-                      :key="activeCustomizationCategory + '-' + JSON.stringify(customization)"
-                      :src="customizedBikeImage"
-                      alt="Customized Bike"
-                      class="max-w-full max-h-full object-contain transition-all duration-500"
-                    />
-                  </Transition>
-                </div>
-    
-                <!-- Панель опций (нижняя часть на мобильных, правая на десктопах) -->
-                <div class="md:w-1/2 bg-gray-800 p-4 overflow-y-auto">
-                  <div class="space-y-6">
-                    <!-- Заголовок активной категории -->
-                    <div class="sticky top-0 bg-gray-800 z-10 pb-2">
-                      <h3 class="text-lg font-bold text-green-400 uppercase tracking-wider">
-                        {{ customizationCategories[activeCustomizationCategory].name }}
-                      </h3>
-                    </div>
-    
-                    <!-- Опции для активной категории -->
-                    <div class="space-y-6">
-                        <div
-                          v-for="(option, index) in customizationCategories[activeCustomizationCategory].options"
-                          :key="option.id"
-                          class="bg-gray-700 rounded-lg overflow-hidden border border-gray-600 shadow-lg"
-                        >
-                          <div class="p-4 flex items-center justify-between border-b border-gray-600">
-                            <div>
-                              <h4 class="font-medium text-white">{{ option.name }}</h4>
-                              <p class="text-sm text-gray-400">{{ option.description }}</p>
-                            </div>
-                            <div class="text-green-400 font-bold text-sm">
-                              {{ option.price ? `+${option.price} ₽` : '' }}
-                            </div>
-                          </div>
-                          <div class="p-4">
-                            <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                              <TransitionGroup name="option" tag="div" class="contents">
-                                <button
-                                  v-for="(value, vIndex) in option.values"
-                                  :key="value.id"
-                                  @click="selectCustomizationOption(option.id, value.id)"
-                                  class="px-3 py-3 rounded cursor-pointer text-sm transition-all duration-300 border
-                                       hover:shadow-lg focus:outline-none relative overflow-hidden"
-                                  :class="
-                                    customization[option.id] === value.id
-                                      ? 'bg-green-500 text-white border-green-400 shadow-green-500/50 shadow'
-                                      : 'bg-gray-600 text-gray-300 border-gray-600 hover:bg-gray-500'
-                                  "
-                                >
-                                  <div class="flex flex-col items-center">
-                                    <span class="font-medium">{{ value.name }}</span>
-                                    <span v-if="value.price" class="mt-1 text-xs opacity-80">
-                                      (+{{ value.price }} ₽)
-                                    </span>
-                                  </div>
-                                  
-                                  <!-- Индикатор выбора -->
-                                  <div 
-                                    v-if="customization[option.id] === value.id"
-                                    class="absolute top-1 right-1"
-                                  >
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-                                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                                    </svg>
-                                  </div>
-                                </button>
-                              </TransitionGroup>
-                            </div>
-                          </div>
-                        </div>
-             
-                    </div>
-                  </div>
-                </div>
-              </div>
+          </div>
+  
+          <!-- Центральная часть: предпросмотр и опции -->
+          <div class="flex-1 flex flex-col overflow-hidden">
+            <!-- Предпросмотр (верхняя часть на мобильных) -->
+            <div
+              class="h-48 sm:h-64 md:h-auto bg-black p-3 sm:p-4 flex items-center justify-center
+                   relative overflow-hidden"
+              style="background: linear-gradient(135deg, #111 20%, #222 80%)"
+            >
+              <!-- Изображение с учетом выбранных опций -->
+              <Transition name="fade" mode="out-in">
+                <img
+                  :key="activeCustomizationCategory + '-' + JSON.stringify(customization)"
+                  :src="customizedBikeImage"
+                  alt="Customized Bike"
+                  class="max-w-full max-h-full object-contain transition-all duration-500"
+                />
+              </Transition>
             </div>
-    
-            <!-- Подвал модального окна -->
-            <div class="bg-black p-4 flex flex-col sm:flex-row items-center justify-between border-t border-gray-700 gap-4">
-              <div>
-                <div class="text-sm text-gray-400">Итоговая стоимость</div>
-                <div class="text-2xl font-bold text-green-400">
-                  {{ calculateTotalPrice() }} ₽
+  
+            <!-- Панель опций (нижняя часть на мобильных) -->
+            <div class="flex-1 bg-gray-800 p-3 sm:p-4 overflow-y-auto">
+              <div class="space-y-4 sm:space-y-6">
+                <!-- Заголовок активной категории -->
+                <div class="sticky top-0 bg-gray-800 z-10 pb-2">
+                  <h3 class="text-base sm:text-lg font-bold text-green-400 uppercase tracking-wider">
+                    {{ customizationCategories[activeCustomizationCategory].name }}
+                  </h3>
                 </div>
-              </div>
-              <div class="flex space-x-4 w-full sm:w-auto">
-                <button
-                  @click="resetCustomization"
-                  class="btn btn-outline text-gray-300 border border-gray-600 px-4 py-2 rounded-md
-                       hover:bg-gray-700 hover:text-white transition-all hover:scale-105 flex-1 sm:flex-none"
-                >
-                  Сбросить
-                </button>
-                <button
-                  @click="saveCustomization"
-                  class="btn btn-primary bg-green-500 text-white px-4 py-2 rounded-md
-                       hover:bg-green-400 transition-all hover:scale-105 flex-1 sm:flex-none"
-                >
-                  Сохранить
-                </button>
+  
+                <!-- Опции для активной категории -->
+                <div class="space-y-4 sm:space-y-6">
+                  <div
+                    v-for="(option, index) in customizationCategories[activeCustomizationCategory].options"
+                    :key="option.id"
+                    class="bg-gray-700 rounded-lg overflow-hidden border border-gray-600 shadow-lg"
+                  >
+                    <div class="p-3 sm:p-4 flex items-center justify-between border-b border-gray-600">
+                      <div>
+                        <h4 class="font-medium text-white text-sm sm:text-base">{{ option.name }}</h4>
+                        <p class="text-xs sm:text-sm text-gray-400">{{ option.description }}</p>
+                      </div>
+                      <div class="text-green-400 font-bold text-xs sm:text-sm">
+                        {{ option.price ? `+${option.price} ₽` : '' }}
+                      </div>
+                    </div>
+                    <div class="p-3 sm:p-4">
+                      <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-3">
+                        <TransitionGroup name="option" tag="div" class="contents">
+                          <button
+                            v-for="(value, vIndex) in option.values"
+                            :key="value.id"
+                            @click="selectCustomizationOption(option.id, value.id)"
+                            class="px-2 sm:px-3 py-2 sm:py-3 rounded cursor-pointer text-xs sm:text-sm transition-all duration-300 border
+                                 hover:shadow-lg focus:outline-none relative overflow-hidden"
+                            :class="
+                              customization[option.id] === value.id
+                                ? 'bg-green-500 text-white border-green-400 shadow-green-500/50 shadow'
+                                : 'bg-gray-600 text-gray-300 border-gray-600 hover:bg-gray-500'
+                            "
+                          >
+                            <div class="flex flex-col items-center">
+                              <span class="font-medium">{{ value.name }}</span>
+                              <span v-if="value.price" class="mt-1 text-xs opacity-80">
+                                (+{{ value.price }} ₽)
+                              </span>
+                            </div>
+                            
+                            <!-- Индикатор выбора -->
+                            <div 
+                              v-if="customization[option.id] === value.id"
+                              class="absolute top-1 right-1"
+                            >
+                              <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 sm:h-4 sm:w-4" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                              </svg>
+                            </div>
+                          </button>
+                        </TransitionGroup>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
+  
+          <!-- Подвал модального окна -->
+          <div class="bg-black p-3 sm:p-4 flex flex-col sm:flex-row items-center justify-between border-t border-gray-700 gap-2 sm:gap-4">
+            <div>
+              <div class="text-xs sm:text-sm text-gray-400">Итоговая стоимость</div>
+              <div class="text-xl sm:text-2xl font-bold text-green-400">
+                {{ calculateTotalPrice() }} ₽
+              </div>
+            </div>
+            <div class="flex space-x-3 sm:space-x-4 w-full sm:w-auto">
+              <button
+                @click="resetCustomization"
+                class="btn btn-outline text-gray-300 border border-gray-600 px-3 sm:px-4 py-2 rounded-md
+                     hover:bg-gray-700 hover:text-white transition-all hover:scale-105 flex-1 sm:flex-none
+                     text-sm sm:text-base"
+              >
+                Сбросить
+              </button>
+              <button
+                @click="saveCustomization"
+                class="btn btn-primary bg-green-500 text-white px-3 sm:px-4 py-2 rounded-md
+                     hover:bg-green-400 transition-all hover:scale-105 flex-1 sm:flex-none
+                     text-sm sm:text-base"
+              >
+                Сохранить
+              </button>
+            </div>
+          </div>
         </div>
-      </Transition>
+      </div>
+    </div>
+  </Transition>
+
     </div>
   </template>
     
   <script setup>
   import { ref, computed, onMounted } from 'vue';
   import { useRoute, useRouter } from 'vue-router';
-  import img1 from "../assets/img1.png"
-import img2 from "../assets/img1.png"
-import img3 from "../assets/img1.png"
+    
   // Подключаем роуты
   const route = useRoute();
   const router = useRouter();
@@ -426,10 +423,10 @@ import img3 from "../assets/img1.png"
       { name: 'Колеса', value: '28 дюймов' }
     ],
     images: [
-    img1,
-    img2,
-       img3,
-       img1
+      '/public/img1.png',
+       '/public/img2.png',
+       '/public/img3.png',
+       '/public/img1.png'
     ]
   });
     
@@ -438,17 +435,17 @@ import img3 from "../assets/img1.png"
       id: 2,
       name: 'E-BIKES Sport',
       price: '189 900',
-      image: img1  },
+      image: '/public/img1.png'    },
     {
       id: 4,
       name: 'E-BIKES Urban Pro',
       price: '179 900',
-      image: img2   },
+      image: '/public/img2.png'    },
     {
       id: 5,
       name: 'E-BIKES Sport Light',
       price: '169 900',
-      image: img3   }
+      image: '/public/img3.png'    }
   ]);
     
   // Индекс текущего изображения товара
@@ -492,13 +489,13 @@ import img3 from "../assets/img1.png"
           name: 'Материал рамы',
           description: 'Выберите материал для рамы велосипеда',
           values: [
-            { id: 'standard', name: 'Алюминий', price: 0, img: '/src/assets/ram.png' },
-            { id: 'premium', name: 'Карбон', price: 30000, img: '/src/assets/ram.png' },
-            { id: 'titanium', name: 'Титан', price: 50000, img: '/src/assets/ram.png' }
+            { id: 'standard', name: 'Алюминий', price: 0, img: '/public/ram.png' },
+            { id: 'premium', name: 'Карбон', price: 30000, img: '/public/ram.png' },
+            { id: 'titanium', name: 'Титан', price: 50000, img: '/public/ram.png' }
           ]
         }
       ],
-      img: '/src/assets/ram.png'
+      img: '/public/ram.png'
     },
     {
       name: 'Двигатель',
@@ -508,13 +505,13 @@ import img3 from "../assets/img1.png"
           name: 'Тип двигателя',
           description: 'Выберите тип и мощность двигателя',
           values: [
-            { id: 'standard', name: '250W Стандарт', price: 0, img: '/src/assets/motor.png' },
-            { id: 'performance', name: '350W Performance', price: 15000, img: '/src/assets/motor.png' },
-            { id: 'pro', name: '500W Pro', price: 25000, img: '/src/assets/motor.png' }
+            { id: 'standard', name: '250W Стандарт', price: 0, img: '/public/motor.png' },
+            { id: 'performance', name: '350W Performance', price: 15000, img: '/public/motor.png' },
+            { id: 'pro', name: '500W Pro', price: 25000, img: '/public/motor.png' }
           ]
         }
       ],
-      img: '/src/assets/motor.png'
+      img: '/public/motor.png'
     },
     {
       name: 'Аккумулятор',
@@ -524,13 +521,13 @@ import img3 from "../assets/img1.png"
           name: 'Емкость аккумулятора',
           description: 'Выберите емкость аккумулятора',
           values: [
-            { id: 'standard', name: '360Wh Стандарт', price: 0, img: '/src/assets/acc.png' },
-            { id: 'extended', name: '500Wh Расширенный', price: 20000, img: '/src/assets/acc.png' },
-            { id: 'max', name: '750Wh Максимальный', price: 35000, img: '/src/assets/acc.png' }
+            { id: 'standard', name: '360Wh Стандарт', price: 0, img: '/public/acc.png' },
+            { id: 'extended', name: '500Wh Расширенный', price: 20000, img: '/public/acc.png' },
+            { id: 'max', name: '750Wh Максимальный', price: 35000, img: '/public/acc.png' }
           ]
         }
       ],
-      img: '/src/assets/acc.png'
+      img: '/public/acc.png'
     },
     {
       name: 'Колеса',
@@ -540,9 +537,9 @@ import img3 from "../assets/img1.png"
           name: 'Тип колес',
           description: 'Выберите тип колес',
           values: [
-            { id: 'standard', name: 'Стандартные', price: 0,img: '/src/assets/wheel.png'  },
-            { id: 'lightweight', name: 'Облегченные', price: 12000,img: '/src/assets/wheel.png'  },
-            { id: 'offroad', name: 'Внедорожные', price: 15000,img: '/src/assets/wheel.png'  }
+            { id: 'standard', name: 'Стандартные', price: 0,img: '/public/wheel.png'  },
+            { id: 'lightweight', name: 'Облегченные', price: 12000,img: '/public/wheel.png'  },
+            { id: 'offroad', name: 'Внедорожные', price: 15000,img: '/public/wheel.png'  }
           ]
         }
       ]
@@ -555,10 +552,10 @@ import img3 from "../assets/img1.png"
           name: 'Тип подвески',
           description: 'Выберите тип подвески',
           values: [
-            { id: 'standard', name: 'Жесткая вилка', price: 0,img: '/src/assets/pod.png' },
-            { id: 'front', name: 'Передняя амортизация', price: 18000,img: '/src/assets/pod.png' },
-            { id: 'full', name: 'Полная амортизация', price: 35000,img: '/src/assets/pod.png'  },
-            { id: 'full', name: 'Полная амортизация', price: 35000,img: '/src/assets/pod.png' }
+            { id: 'standard', name: 'Жесткая вилка', price: 0,img: '/public/pod.png' },
+            { id: 'front', name: 'Передняя амортизация', price: 18000,img: '/public/pod.png' },
+            { id: 'full', name: 'Полная амортизация', price: 35000,img: '/public/pod.png'  },
+            { id: 'full', name: 'Полная амортизация', price: 35000,img: '/public/pod.png' }
           ]
         }
       ]
@@ -571,8 +568,8 @@ import img3 from "../assets/img1.png"
           name: 'Тип тормозов',
           description: 'Выберите тип тормозной системы',
           values: [
-            { id: 'standard', name: 'Гидравлические', price: 0,img: '/src/assets/brakes.png' },
-            { id: 'premium', name: 'Премиум гидравлические', price: 10000,img: '/src/assets/brakes.png' }
+            { id: 'standard', name: 'Гидравлические', price: 0,img: '/public/brakes.png' },
+            { id: 'premium', name: 'Премиум гидравлические', price: 10000,img: '/public/brakes.png' }
           ]
         }
       ]

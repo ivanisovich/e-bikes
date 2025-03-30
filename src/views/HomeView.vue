@@ -4,10 +4,10 @@
     <section class="relative h-screen flex items-center">
       <div class="absolute inset-0 z-0">
         <div class="absolute inset-0 bg-gradient-to-r from-black to-black/20"></div>
-        <img src="../assets/photo.png" alt="E-BIKE" class="w-full h-full object-cover object-center" />
+        <img src="/public/photo.png" alt="E-BIKE" class="w-full h-full object-cover object-center" />
       </div>
       
-      <div class="container  relative z-10">
+      <div class="container relative z-10">
         <div class="max-w-2xl">
           <h1 class="text-4xl md:text-6xl font-bold mb-6">
             Будущее городской мобильности
@@ -87,7 +87,6 @@
                 </div>
               </div>
             </router-link>
-       
             <div class="p-6">
               <h3 class="text-xl font-bold mb-2">{{ product.name }}</h3>
               <div class="flex justify-between items-center">
@@ -159,28 +158,26 @@
 
 <script setup>
 import { ref } from 'vue';
-import img1 from "../assets/img1.png"
-import img2 from "../assets/img1.png"
-import img3 from "../assets/img1.png"
+
 const featuredProducts = ref([
   {
     id: 1,
     name: 'E-BIKES Urban',
     price: '149 900',
     rating: 4.8,
-    image: img1  },
+    image: '/public/img1.png'  },
   {
     id: 2,
     name: 'E-BIKES Sport',
     price: '189 900',
     rating: 4.9,
-    image: img2  },
+    image: '/public/img2.png'  },
   {
     id: 3,
     name: 'E-BIKES Cargo',
     price: '219 900',
     rating: 4.7,
-    image: img3  }
+    image: '/public/img3.png'  }
 ]);
 
 const testimonials = ref([
