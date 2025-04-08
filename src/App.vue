@@ -76,7 +76,7 @@
               <span>BIKES</span>
             </div>
             <p class="text-gray-400 max-w-md">
-              Современные электровелосипеды с минималистичным дизайном и передовыми технологиями для городской среды.
+              Современные электровелосипеды с минималистичным дизайном и передовыми технологиями для городской среды Алматы.
             </p>
           </div>
           <div class="grid grid-cols-2 md:grid-cols-3 gap-8">
@@ -92,9 +92,9 @@
             <div>
               <h3 class="text-white font-medium mb-4">Контакты</h3>
               <ul class="space-y-2 text-gray-400">
-                <li>info@e-bikes.com</li>
-                <li>+7 (800) 123-45-67</li>
-                <li>Москва, ул. Велосипедная, 42</li>
+                <li>info@e-bikes.kz</li>
+                <li>+7 (727) 123-45-67</li>
+                <li>Алматы, ул. Абая, 42</li>
               </ul>
             </div>
             <div class="col-span-2 md:col-span-1">
@@ -120,15 +120,51 @@
 </template>
 
 <script setup>
-import { ref,watch } from 'vue';
+import { ref, watch, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 
 const isMobileMenuOpen = ref(false);
 const route = useRoute();
 
-// Close mobile menu when route changes
+// Закрывать мобильное меню при смене маршрута
 watch(() => route.path, () => {
   isMobileMenuOpen.value = false;
+});
+
+// Для динамической загрузки популярных товаров
+const featuredProducts = ref([]);
+const testimonials = ref([
+  {
+    name: 'Алексей',
+    location: 'Алматы',
+    rating: 5,
+    text: 'Отличный электровелосипед! Минималистичный дизайн привлекает внимание, а батарея хватает на весь день поездок по городу.'
+  },
+  {
+    name: 'Елена',
+    location: 'Нур-Султан',
+    rating: 4,
+    text: 'Очень довольна покупкой. Легкий, маневренный и стильный. Единственный минус — хотелось бы больше вариантов расцветок.'
+  },
+  {
+    name: 'Дмитрий',
+    location: 'Шымкент',
+    rating: 5,
+    text: 'Использую для ежедневных поездок на работу. Экономит время и деньги, а сервисное обслуживание на высшем уровне.'
+  }
+]);
+
+// Загрузка популярных товаров с сервера
+onMounted(async () => {
+  try {
+    const response = await fetch('http://localhost:3000/products');
+    if (response.ok) {
+      // Можно при необходимости фильтровать или сортировать товары
+      featuredProducts.value = await response.json();
+    }
+  } catch (error) {
+    console.error('Ошибка загрузки товаров:', error);
+  }
 });
 </script>
 

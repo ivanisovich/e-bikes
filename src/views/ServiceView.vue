@@ -36,7 +36,7 @@
                 <h3 class="text-xl font-bold mb-4">{{ service.name }}</h3>
                 <p class="text-gray-300 mb-4">{{ service.description }}</p>
                 <div class="flex justify-between items-center">
-                  <span class="text-green-400 font-bold">от {{ service.price }} ₽</span>
+                  <span class="text-green-400 font-bold">от {{ service.price }} ₸</span>
                   <button @click="selectService(service)" class="text-sm underline text-gray-300 hover:text-white">
                     Подробнее
                   </button>
@@ -209,7 +209,7 @@
               </div>
               <h3 class="text-2xl font-bold mb-2">{{ selectedService.name }}</h3>
               <p class="text-gray-300 mb-4">{{ selectedService.description }}</p>
-              <div class="text-green-400 font-bold mb-4">от {{ selectedService.price }} ₽</div>
+              <div class="text-green-400 font-bold mb-4">от {{ selectedService.price }} ₸</div>
             </div>
             
             <div class="mb-6">

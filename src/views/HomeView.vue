@@ -10,10 +10,10 @@
       <div class="container relative z-10">
         <div class="max-w-2xl">
           <h1 class="text-4xl md:text-6xl font-bold mb-6">
-            Будущее городской мобильности
+            Будущее городской мобильности в Алматы
           </h1>
           <p class="text-xl md:text-2xl mb-8 text-gray-300">
-            Электровелосипеды с минималистичным дизайном и передовыми технологиями
+            Электровелосипеды с минималистичным дизайном и передовыми технологиями для современной жизни.
           </p>
           <div class="flex flex-wrap gap-4">
             <router-link to="/catalog" class="btn btn-primary">
@@ -80,17 +80,17 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           <div v-for="product in featuredProducts" :key="product.id" class="bg-gray-900 rounded-lg overflow-hidden group">
             <router-link :to="`/catalog/${product.id}`" class="relative overflow-hidden btn btn-primary text-sm py-2">
-              <img :src="product.image" :alt="product.name" class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-105" />
+              <img :src="product.images[0]" :alt="product.name" class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-105" />
               <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
                 <div class="p-4">
-                  
+                  <!-- Дополнительное содержимое, если нужно -->
                 </div>
               </div>
             </router-link>
             <div class="p-6">
               <h3 class="text-xl font-bold mb-2">{{ product.name }}</h3>
               <div class="flex justify-between items-center">
-                <p class="text-green-400 font-bold">{{ product.price }} ₽</p>
+                <p class="text-green-400 font-bold">{{ product.price }} ₸</p>
                 <div class="flex items-center text-gray-400">
                   <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
                     <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
@@ -129,7 +129,7 @@
             <p class="text-gray-300">{{ testimonial.text }}</p>
             <div class="flex mt-4">
               <div v-for="i in 5" :key="i" class="text-yellow-400">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" :fill="i <= testimonial.rating ? 'currentColor' : 'none'" :stroke="i <= testimonial.rating ? 'none' : 'currentColor'">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
                   <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                 </svg>
               </div>
@@ -145,7 +145,7 @@
         <div class="flex flex-col md:flex-row items-center justify-between">
           <div class="mb-8 md:mb-0 md:mr-8">
             <h2 class="text-3xl md:text-4xl font-bold mb-4">Готовы к новому опыту?</h2>
-            <p class="text-xl  max-w-xl">Запишитесь на тест-драйв и испытайте наши электровелосипеды в действии</p>
+            <p class="text-xl max-w-xl">Запишитесь на тест-драйв и испытайте наши электровелосипеды в действии</p>
           </div>
           <router-link to="/contacts" class="btn p-2 bg-black text-white hover:bg-gray-800">
             Записаться на тест-драйв
@@ -157,47 +157,38 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 
-const featuredProducts = ref([
-  {
-    id: 1,
-    name: 'E-BIKES Urban',
-    price: '149 900',
-    rating: 4.8,
-    image: 'img1.png'  },
-  {
-    id: 2,
-    name: 'E-BIKES Sport',
-    price: '189 900',
-    rating: 4.9,
-    image: 'img2.png'  },
-  {
-    id: 3,
-    name: 'E-BIKES Cargo',
-    price: '219 900',
-    rating: 4.7,
-    image: 'img3.png'  }
-]);
-
+const featuredProducts = ref([]);
 const testimonials = ref([
   {
     name: 'Алексей',
-    location: 'Москва',
+    location: 'Алматы',
     rating: 5,
-    text: 'Отличный электровелосипед! Минималистичный дизайн привлекает внимание, а батареи хватает на весь день поездок по городу.'
+    text: 'Отличный электровелосипед! Минималистичный дизайн привлекает внимание, а батарея хватает на весь день поездок по городу.'
   },
   {
     name: 'Елена',
-    location: 'Санкт-Петербург',
+    location: 'Нур-Султан',
     rating: 4,
-    text: 'Очень довольна покупкой. Легкий, маневренный и стильный. Единственный минус - хотелось бы больше вариантов цветов.'
+    text: 'Очень довольна покупкой. Легкий, маневренный и стильный. Единственный минус — хотелось бы больше вариантов расцветок.'
   },
   {
     name: 'Дмитрий',
-    location: 'Екатеринбург',
+    location: 'Шымкент',
     rating: 5,
     text: 'Использую для ежедневных поездок на работу. Экономит время и деньги, а сервисное обслуживание на высшем уровне.'
   }
 ]);
+
+onMounted(async () => {
+  try {
+    const response = await fetch('http://138.68.93.210/products');
+    if (response.ok) {
+      featuredProducts.value = await response.json();
+    }
+  } catch (error) {
+    console.error('Ошибка загрузки товаров:', error);
+  }
+});
 </script>

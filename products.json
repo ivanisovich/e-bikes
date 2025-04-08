@@ -1,0 +1,27 @@
+[
+  {
+    "id": "978aedc9-979a-4f9f-b14b-97f44dcf51db",
+    "name": "Электровелосипед E-Bike Mincto 20 дюйм 2024 17 дюймов черный",
+    "description": "test",
+    "price": "850000",
+    "priceValue": 850000,
+    "images": [
+      "https://resources.cdn-kaspi.kz/img/m/p/p40/p83/34498921.jpg?format=gallery-large"
+    ],
+    "category": "электовелосипеды",
+    "characteristics": ""
+  },
+  {
+    "id": "ea49724d-2668-4f72-93d9-b9db8da76a75",
+    "name": "Электровелосипед CEAYA A20 20 дюйм 2025 20 дюймов черный",
+    "description": "test",
+    "price": 600000,
+    "priceValue": 600000,
+    "images": [
+      "https://resources.cdn-kaspi.kz/img/m/p/h5a/h58/86987641749534.jpg?format=gallery-large",
+      "https://resources.cdn-kaspi.kz/img/m/p/hcc/hd3/86987641815070.jpg?format=gallery-large",
+      "https://resources.cdn-kaspi.kz/img/m/p/hb1/hbb/86987641880606.jpg?format=gallery-large"
+    ],
+    "category": "электовелосипеды"
+  }
+]

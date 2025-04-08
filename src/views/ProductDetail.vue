@@ -1,6 +1,6 @@
 <template>
-  <div class="py-8 md:py-16">
-    <div class="container mx-auto px-4">
+  <div  v-if="product.name"  class="py-8 md:py-16">
+    <div  class="container mx-auto px-4">
       <!-- Хлебные крошки -->
       <div class="flex flex-wrap items-center text-sm text-gray-400 mb-6 md:mb-8">
         <router-link to="/" class="hover:text-white">Главная</router-link>
@@ -55,7 +55,7 @@
             <span class="text-gray-400 ml-2 text-sm md:text-base">{{ product.reviewCount }} отзывов</span>
           </div>
 
-          <p class="text-2xl md:text-3xl font-bold text-green-400 mb-4 md:mb-6">{{ product.price }} ₽</p>
+          <p class="text-2xl md:text-3xl font-bold text-green-400 mb-4 md:mb-6">{{ product.price }} ₸</p>
 
           <!-- Краткое описание + список фич -->
           <div class="mb-6 md:mb-8">
@@ -103,7 +103,7 @@
           <!-- Информация о доставке -->
           <div class="bg-gray-900 p-3 md:p-4 rounded-lg">
             <h3 class="font-bold mb-1 md:mb-2 text-sm md:text-base">Доставка</h3>
-            <p class="text-gray-300 text-xs md:text-sm">Бесплатная доставка по России при заказе от 100 000 ₽</p>
+            <p class="text-gray-300 text-xs md:text-sm">Бесплатная доставка по России при заказе от 100 000 ₸</p>
           </div>
         </div>
       </div>
@@ -127,13 +127,13 @@
           <div v-for="relatedProduct in relatedProducts" :key="relatedProduct.id"
             class="bg-gray-900 rounded-lg overflow-hidden group">
             <div class="relative overflow-hidden">
-              <img :src="relatedProduct.image" :alt="relatedProduct.name"
+              <img :src="relatedProduct.images[0]" :alt="relatedProduct.name"
                 class="w-full h-40 md:h-48 object-cover transition-transform duration-500 group-hover:scale-105" />
             </div>
             <div class="p-4 md:p-6">
               <h3 class="text-base md:text-lg font-bold mb-2">{{ relatedProduct.name }}</h3>
               <div class="flex justify-between items-center">
-                <p class="text-green-400 font-bold text-sm md:text-base">{{ relatedProduct.price }} ₽</p>
+                <p class="text-green-400 font-bold text-sm md:text-base">{{ relatedProduct.price }} ₸</p>
                 <router-link :to="`/catalog/${relatedProduct.id}`"
                   class="text-xs md:text-sm text-gray-300 hover:text-white">
                   Подробнее
@@ -244,7 +244,7 @@
                           <p class="text-xs md:text-sm text-gray-400">{{ option.description }}</p>
                         </div>
                         <div class="text-green-400 font-bold text-xs md:text-sm">
-                          {{ option.price ? `+${option.price} ₽` : '' }}
+                          {{ option.price ? `+${option.price} ₸` : '' }}
                         </div>
                       </div>
                       <div class="p-3 md:p-4">
@@ -259,7 +259,7 @@
                               <div class="flex flex-col items-center">
                                 <span class="font-medium">{{ value.name }}</span>
                                 <span v-if="value.price" class="mt-1 text-[10px] md:text-xs opacity-80">
-                                  (+{{ value.price }} ₽)
+                                  (+{{ value.price }} ₸)
                                 </span>
                               </div>
 
@@ -289,7 +289,7 @@
             <div class="text-center sm:text-left w-full sm:w-auto">
               <div class="text-xs md:text-sm text-gray-400">Итоговая стоимость</div>
               <div class="text-xl md:text-2xl font-bold text-green-400">
-                {{ calculateTotalPrice() }} ₽
+                {{ calculateTotalPrice() }} ₸
               </div>
             </div>
             <div class="flex space-x-3 md:space-x-4 w-full sm:w-auto">
@@ -318,70 +318,18 @@ import { useRoute, useRouter } from 'vue-router';
 // Подключаем роуты
 const route = useRoute();
 const router = useRouter();
+const product = ref({});
+const products = ref([]);
 
-// Жестко заданные данные товара (в реальном проекте — загрузка с сервера)
-const product = ref({
-  id: 1,
-  name: 'E-BIKES Urban',
-  description: 'Городской электровелосипед с минималистичным дизайном и передовыми технологиями. Идеально подходит для ежедневных поездок по городу.',
-  price: '149 900',
-  basePrice: 149900,
-  rating: 4.8,
-  reviewCount: 24,
-  colors: [
-    { name: 'Белый', value: 'white' },
-    { name: 'Черный', value: 'black' },
-    { name: 'Зеленый', value: 'green' }
-  ],
-  features: [
-    'Mid-mounted мотор с оптимизированной плотностью крутящего момента',
-    'Shimano 9-скоростная трансмиссия',
-    'Аккумулятор 360Wh с возможностью быстрой зарядки',
-    'Гидравлические дисковые тормоза',
-    'Интегрированное освещение',
-    'Матовое покрытие рамы'
-  ],
-  specifications: [
-    { name: 'Двигатель', value: 'Mid-mounted, 250W' },
-    { name: 'Аккумулятор', value: '360Wh, съемный' },
-    { name: 'Запас хода', value: 'До 80 км' },
-    { name: 'Максимальная скорость', value: '25 км/ч (ограничено)' },
-    { name: 'Трансмиссия', value: 'Shimano 9-скоростная' },
-    { name: 'Тормоза', value: 'Гидравлические дисковые' },
-    { name: 'Вес', value: '18 кг' },
-    { name: 'Рама', value: 'Алюминиевый сплав' },
-    { name: 'Колеса', value: '28 дюймов' }
-  ],
-  images: [
-    "/img1.png",
-    "/img2.png",
-    "/img3.png",
-    "/img1.png",
-  ]
+const relatedProducts = computed(() => {
+  return products.value
+    .filter(p => p.id !== product.value.id)
+    .slice(0, 3);
 });
 
-// Связанные товары (упрощённо)
-const relatedProducts = ref([
-  {
-    id: 2,
-    name: 'E-BIKES Sport',
-    price: '189 900',
-    image: "/img1.png"
-  },
-  {
-    id: 4,
-    name: 'E-BIKES Urban Pro',
-    price: '179 900',
-    image: "/img2.png"
-  },
-  {
-    id: 5,
-    name: 'E-BIKES Sport Light',
-    price: '169 900',
-    image: "/img3.png"
-  }
-]);
 
+
+console.log(relatedProducts)
 // Индекс текущего изображения товара
 const activeImageIndex = ref(0);
 
@@ -561,7 +509,7 @@ const getSelectedOptionName = () => {
     const selectedValueId = customization.value[option.id];
     const selectedValue = option.values.find(val => val.id === selectedValueId);
     if (selectedValue) {
-      return `${option.name}: ${selectedValue.name}${selectedValue.price ? ` (+${selectedValue.price} ₽)` : ''}`;
+      return `${option.name}: ${selectedValue.name}${selectedValue.price ? ` (+${selectedValue.price} ₸)` : ''}`;
     }
   }
   return '';
@@ -617,7 +565,32 @@ function addToCart() {
   alert(`Товар "${product.value.name}" добавлен в корзину`);
 }
 
+onMounted(async () => {
+  try {
+    const resProduct = await fetch(`http://138.68.93.210/products/${route.params.id}`);
+    if (resProduct.ok) {
+      product.value = await resProduct.json();
+    }
 
+    const resAll = await fetch('http://138.68.93.210/products');
+    if (resAll.ok) {
+      products.value = await resAll.json();
+    }
+  } catch (error) {
+    console.error('Ошибка загрузки:', error);
+  }
+});
+
+onMounted(async () => {
+  try {
+    const response = await fetch('http://138.68.93.210/products');
+    if (response.ok) {
+      products.value = await response.json();
+    }
+  } catch (error) {
+    console.error('Ошибка загрузки товаров:', error);
+  }
+});
 </script>
 
 <style scoped>

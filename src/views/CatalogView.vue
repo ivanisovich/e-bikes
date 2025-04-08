@@ -33,9 +33,9 @@
             <select v-model="filters.price"
               class="w-full bg-gray-800 text-white rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-500">
               <option value="">Любая цена</option>
-              <option value="low">До 150 000 ₽</option>
-              <option value="medium">150 000 - 200 000 ₽</option>
-              <option value="high">Свыше 200 000 ₽</option>
+              <option value="low">До 150 000 ₸</option>
+              <option value="medium">150 000 - 200 000 ₸</option>
+              <option value="high">Свыше 200 000 ₸</option>
             </select>
           </div>
 
@@ -57,7 +57,7 @@
         <div v-for="product in filteredProducts" :key="product.id" class="bg-gray-900 rounded-lg overflow-hidden group">
           <div :key="product.id" class="bg-gray-900 rounded-lg overflow-hidden group">
             <div class="relative overflow-hidden">
-              <img :src="product.image" :alt="product.name"
+              <img :src="product.images[0]" :alt="product.name"
                 class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-105" />
               <div
                 class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
@@ -72,7 +72,7 @@
               <h3 class="text-xl font-bold mb-2">{{ product.name }}</h3>
               <p class="text-sm text-gray-400 mb-4">{{ product.description }}</p>
               <div class="flex justify-between items-center">
-                <p class="text-green-400 font-bold">{{ product.price }} ₽</p>
+                <p class="text-green-400 font-bold">{{ product.price }} ₸</p>
                 <button @click="addToCart(product)" class="btn btn-outline text-sm py-1 px-3">
                   В корзину
                 </button>
@@ -98,7 +98,7 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue';
+import { ref, computed,onMounted } from 'vue';
 
 const filters = ref({
   category: '',
@@ -108,75 +108,21 @@ const filters = ref({
 
 const sorting = ref('popular');
 
-const products = ref([
-  {
-    id: 1,
-    name: 'E-BIKES Urban',
-    description: 'Городской электровелосипед с минималистичным дизайном',
-    price: '149 900',
-    priceValue: 149900,
-    category: 'urban',
-    color: 'white',
-    popular: 95,
-    isNew: false,
-    image: 'img1.png'
-  },
-  {
-    id: 2,
-    name: 'E-BIKES Sport',
-    description: 'Спортивный электровелосипед для активного отдыха',
-    price: '189 900',
-    priceValue: 189900,
-    category: 'sport',
-    color: 'black',
-    popular: 87,
-    isNew: true,
-    image: 'img2.png'  },
-  {
-    id: 3,
-    name: 'E-BIKES Cargo',
-    description: 'Грузовой электровелосипед для перевозки вещей',
-    price: '219 900',
-    priceValue: 219900,
-    category: 'cargo',
-    color: 'green',
-    popular: 78,
-    isNew: false,
-    image: 'img3.png'  },
-  {
-    id: 4,
-    name: 'E-BIKES Urban Pro',
-    description: 'Улучшенная версия городского электровелосипеда',
-    price: '179 900',
-    priceValue: 179900,
-    category: 'urban',
-    color: 'black',
-    popular: 92,
-    isNew: true,
-    image: 'img1.png'  },
-  {
-    id: 5,
-    name: 'E-BIKES Sport Light',
-    description: 'Облегченная версия спортивного электровелосипеда',
-    price: '169 900',
-    priceValue: 169900,
-    category: 'sport',
-    color: 'white',
-    popular: 85,
-    isNew: false,
-    image: 'img2.png'  },
-  {
-    id: 6,
-    name: 'E-BIKES Cargo Max',
-    description: 'Грузовой электровелосипед с увеличенной грузоподъемностью',
-    price: '249 900',
-    priceValue: 249900,
-    category: 'cargo',
-    color: 'green',
-    popular: 75,
-    isNew: true,
-    image: 'img3.png'  }
-]);
+const products = ref([]);
+
+const featuredProducts = ref([]);
+
+
+onMounted(async () => {
+  try {
+    const response = await fetch('http://138.68.93.210/products');
+    if (response.ok) {
+      products.value = await response.json();
+    }
+  } catch (error) {
+    console.error('Ошибка загрузки товаров:', error);
+  }
+});
 
 const filteredProducts = computed(() => {
   let result = [...products.value];
